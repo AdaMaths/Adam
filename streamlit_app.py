@@ -10,47 +10,49 @@ os.makedirs("generated", exist_ok=True)
 os.makedirs("logos", exist_ok=True)
 
 st.title("AdamCV")
-st.markdown("Générateur de CV administratif sénégalais – format officiel")
+st.markdown("Générateur de CV")
 
 # ---------------- CLASSE PDF ----------------
 class PDF(FPDF):
     def header(self):
+        # Marges globales
+        self.set_left_margin(15)
+        self.set_right_margin(15)
         self.set_auto_page_break(auto=True, margin=20)
 
         # Logo discret
-        if self.logo:
-            self.image(self.logo, 10, 10, 18)
+        if getattr(self, "logo", None):
+            self.image(self.logo, 15, 10, 20)
 
         # Nom
-        self.set_xy(35, 12)
-        self.set_font("Arial", "B", 15)
-        self.cell(0, 8, self.nom.upper(), ln=True)
+        self.set_xy(40, 12)
+        self.set_font("Arial", "B", 16)
+        self.cell(0, 8, getattr(self, "nom", "").upper(), ln=True)
 
         # Contact
         self.set_font("Arial", "", 11)
-        self.cell(0, 6, f"{self.email} | {self.telephone}", ln=True)
+        self.set_x(40)
+        self.cell(0, 6, f"{getattr(self, 'email', '')} | {getattr(self, 'telephone', '')}", ln=True)
 
-        # Marque AdamCV
-        #self.set_font("Arial", "B", 9)
-        #self.set_xy(150, 12)
-        #self.cell(40, 6, "ADAMCV", align="R")
-
-        self.ln(8)
+        self.ln(10)
 
     def section(self, titre):
-        self.set_font("Arial", "B", 12)
+        self.set_font("Arial", "B", 13)
+        self.set_x(20)  # Décalage à gauche
         self.cell(0, 7, titre.upper(), ln=True)
-        self.line(10, self.get_y(), 200, self.get_y())
-        self.ln(2)
+        self.set_x(20)
+        self.line(20, self.get_y(), 190, self.get_y())  # Ligne sous le titre
+        self.ln(4)  # Espace après le titre
 
     def texte(self, txt):
         self.set_font("Arial", "", 11)
+        self.set_x(20)  # Décalage à gauche
         self.multi_cell(0, 6, txt)
-        self.ln(1)
+        self.ln(4)  # Espace après le texte
 
 # ---------------- CV ADMINISTRATIF ----------------
 def cv_administratif(pdf, d):
-    pdf.section("Etat civil")
+    pdf.section("État civil")
     pdf.texte(
         f"Nom : {d['Nom']}\n"
         f"Date de naissance : {d['Date naissance']}\n"
@@ -105,6 +107,8 @@ if valider:
     pdf = PDF(format="A4")
     pdf.nom = nom
     pdf.logo = None
+    
+    
 
     if logo:
         logo_path = f"logos/{logo.name}"
