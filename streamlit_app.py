@@ -80,9 +80,7 @@ with st.form("form_cv"):
 
     # Date de naissance réaliste
     date_naissance = st.date_input(
-        "Date de naissance",
-        min_value=date(1950, 1, 1),
-        max_value=date.today()
+        "Date de naissance"
     )
 
     nationalite = st.text_input("Nationalité")
