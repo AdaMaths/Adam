@@ -10,7 +10,7 @@ os.makedirs("generated", exist_ok=True)
 os.makedirs("logos", exist_ok=True)
 
 st.title("AdamCV")
-st.markdown("Générateur de CV administratif sénégalais – format officiel")
+st.markdown("Voici mon générateur de CV")
 
 # ---------------- CLASSE PDF ----------------
 class PDF(FPDF):
