@@ -80,7 +80,10 @@ with st.form("form_cv"):
 
     # Date de naissance réaliste
     date_naissance = st.date_input(
-        "Date de naissance"
+        "Date de naissance",
+        value=date(0000, 00, 00),
+        min_value=date(1950, 1, 1),
+        max_value=date.today()
     )
 
     nationalite = st.text_input("Nationalité")
@@ -101,8 +104,6 @@ with st.form("form_cv"):
 if valider:
     pdf = PDF(format="A4")
     pdf.nom = nom
-    pdf.email = email
-    pdf.telephone = telephone
     pdf.logo = None
 
     if logo:
