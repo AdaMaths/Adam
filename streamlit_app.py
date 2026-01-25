@@ -31,9 +31,9 @@ class PDF(FPDF):
         self.cell(0, 6, f"{self.email} | {self.telephone}", ln=True)
 
         # Marque AdamCV
-        self.set_font("Arial", "B", 9)
-        self.set_xy(150, 12)
-        self.cell(40, 6, "ADAMCV", align="R")
+        #self.set_font("Arial", "B", 9)
+        #self.set_xy(150, 12)
+        #self.cell(40, 6, "ADAMCV", align="R")
 
         self.ln(8)
 
@@ -81,7 +81,6 @@ with st.form("form_cv"):
     # Date de naissance réaliste
     date_naissance = st.date_input(
         "Date de naissance",
-        value=date(1990, 1, 1),
         min_value=date(1950, 1, 1),
         max_value=date.today()
     )
