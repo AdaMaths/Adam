@@ -52,7 +52,7 @@ def cv_administratif(pdf, d):
         f"Date de naissance : {d['Date naissance']}\n"
         f"Nationalité : {d['Nationalité']}\n"
         f"Téléphone : {d['Téléphone']}\n"
-        f"Email : {d['Email']}"
+        f"Email : {d['Email']}\n"
         f"Adresse : {d['Adresse']}"
     )
 
