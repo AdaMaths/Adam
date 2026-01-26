@@ -53,6 +53,7 @@ def cv_administratif(pdf, d):
         f"Nationalité : {d['Nationalité']}\n"
         f"Téléphone : {d['Téléphone']}\n"
         f"Email : {d['Email']}"
+        f"Adresse : {d['Adresse']}"
     )
 
     pdf.section("Profil")
@@ -86,7 +87,7 @@ with st.form("form_cv"):
     competences = st.text_area("Compétences")
     langues = st.text_area("Langues")
 
-    valider = st.form_submit_button("Générer le CV officiel")
+    valider = st.form_submit_button("Creer le CV")
 
 # ---------------- GÉNÉRATION PDF ----------------
 if valider:
@@ -135,4 +136,4 @@ if valider:
             file_name=fichier
         )
 
-    st.success("CV administratif généré avec succès")
+    st.success("CV généré avec succès")
