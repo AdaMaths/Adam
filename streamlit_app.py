@@ -113,6 +113,7 @@ if valider:
         "Date naissance": date_naissance,
         "Nationalité": nationalite or "",
         "Email": email or "",
+        "Adresse": adress or "",
         "Téléphone": telephone or "",
         "Profil": profil or "",
         "Diplômes": diplomes or "",
