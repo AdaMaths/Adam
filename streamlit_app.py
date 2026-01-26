@@ -56,8 +56,7 @@ def cv_administratif(pdf, d):
         f"Nom : {d['Nom']}\n"
         f"Date de naissance : {d['Date naissance']}\n"
         f"Nationalité : {d['Nationalité']}\n"
-        f"Téléphone : {d['Téléphone']}\n"
-        f"Email : {d['Email']}"
+        f"Adresse : {d['Adresse']}\n"
     )
 
     pdf.section("Profil")
@@ -83,7 +82,7 @@ with st.form("form_cv"):
     telephone = st.text_input("Téléphone")
 
     # Date arbitraire / vide par défaut
-    date_naissance_str = st.text_input("Date de naissance (jj/mm/aaaa)")
+    date_naissance_str = st.text_input("Date de naissance")
 
     profil = st.text_area("Profil")
     diplomes = st.text_area("Diplômes / Formations")
@@ -98,7 +97,7 @@ with st.form("form_cv"):
 # ---------------- GÉNÉRATION PDF ----------------
 if valider:
     pdf = PDF(format="A4")
-    pdf.nom = nom or ""
+    pdf.cv = Curriculum vitae or ""
     pdf.logo = None
     pdf.email = email or ""
     pdf.telephone = telephone or ""
@@ -122,6 +121,7 @@ if valider:
 
     # Données
     donnees = {
+        "Nom": Curriculum vitae or "",
         "Nom": nom or "",
         "Date naissance": date_naissance,
         "Nationalité": nationalite or "",
