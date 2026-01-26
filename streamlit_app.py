@@ -20,7 +20,7 @@ class PDF(FPDF):
         self.set_auto_page_break(auto=True, margin=20)
 
         # Logo discret
-        if getattr(self, "logo", None):
+       # if getattr(self, "logo", None):
             self.image(self.logo, 15, 10, 20)
 
         # Nom
@@ -56,7 +56,8 @@ def cv_administratif(pdf, d):
         f"Nom : {d['Nom']}\n"
         f"Date de naissance : {d['Date naissance']}\n"
         f"Nationalité : {d['Nationalité']}\n"
-        f"Adresse : {d['Adresse']}\n"
+        f"Téléphone : {d['Téléphone']}\n"
+        f"Email : {d['Email']}"
     )
 
     pdf.section("Profil")
@@ -81,7 +82,7 @@ with st.form("form_cv"):
     email = st.text_input("Email")
     telephone = st.text_input("Téléphone")
 
-    # Date arbitraire / vide par défaut
+    
     date_naissance_str = st.text_input("Date de naissance")
 
     profil = st.text_area("Profil")
@@ -97,16 +98,16 @@ with st.form("form_cv"):
 # ---------------- GÉNÉRATION PDF ----------------
 if valider:
     pdf = PDF(format="A4")
-    pdf.cv = Curriculum vitae or ""
-    pdf.logo = None
+    pdf.nom = nom or ""
+    #pdf.logo = None
     pdf.email = email or ""
     pdf.telephone = telephone or ""
 
-    if logo:
-        logo_path = f"logos/{logo.name}"
-        with open(logo_path, "wb") as f:
-            f.write(logo.getbuffer())
-        pdf.logo = logo_path
+    #if logo:
+        #logo_path = f"logos/{logo.name}"
+        #with open(logo_path, "wb") as f:
+           # f.write(logo.getbuffer())
+       # pdf.logo = logo_path
 
     pdf.add_page()
 
@@ -121,7 +122,6 @@ if valider:
 
     # Données
     donnees = {
-        "Nom": Curriculum vitae or "",
         "Nom": nom or "",
         "Date naissance": date_naissance,
         "Nationalité": nationalite or "",
