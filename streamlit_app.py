@@ -77,8 +77,8 @@ with st.form("form_cv"):
     nationalite = st.text_input("Nationalité")
     email = st.text_input("Email")
     telephone = st.text_input("Téléphone")
+    adress = st.text_input("Adresse")
 
-    # Date arbitraire / vide par défaut
     date_naissance_str = st.text_input("Date de naissance")
 
     profil = st.text_area("Profil")
