@@ -1,13 +1,12 @@
 import streamlit as st
 from fpdf import FPDF
-import os
 from datetime import datetime
+import os
 
 # ---------------- CONFIGURATION ----------------
 st.set_page_config(page_title="AdamCV", layout="centered")
 
 os.makedirs("generated", exist_ok=True)
-os.makedirs("logos", exist_ok=True)
 
 st.title("AdamCV")
 st.markdown("Voici mon générateur de CV")
@@ -18,10 +17,6 @@ class PDF(FPDF):
         self.set_left_margin(15)
         self.set_right_margin(15)
         self.set_auto_page_break(auto=True, margin=20)
-
-        # Logo discret
-       # if getattr(self, "logo", None):
-            self.image(self.logo, 15, 10, 20)
 
         # Nom
         self.set_xy(40, 12)
@@ -82,7 +77,7 @@ with st.form("form_cv"):
     email = st.text_input("Email")
     telephone = st.text_input("Téléphone")
 
-    
+    # Date arbitraire / vide par défaut
     date_naissance_str = st.text_input("Date de naissance")
 
     profil = st.text_area("Profil")
@@ -91,23 +86,14 @@ with st.form("form_cv"):
     competences = st.text_area("Compétences")
     langues = st.text_area("Langues")
 
-    logo = st.file_uploader("Logo (optionnel)", type=["png", "jpg"])
-
     valider = st.form_submit_button("Générer le CV officiel")
 
 # ---------------- GÉNÉRATION PDF ----------------
 if valider:
     pdf = PDF(format="A4")
     pdf.nom = nom or ""
-    #pdf.logo = None
     pdf.email = email or ""
     pdf.telephone = telephone or ""
-
-    #if logo:
-        #logo_path = f"logos/{logo.name}"
-        #with open(logo_path, "wb") as f:
-           # f.write(logo.getbuffer())
-       # pdf.logo = logo_path
 
     pdf.add_page()
 
